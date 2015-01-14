@@ -11,4 +11,12 @@ public class Writer extends BasicAbstractWriter {
 		super (outputStream);
 	}
 
+	public void reqConnect(String username, String password) {
+		writeInt(Protocol.CONNECT);
+		writeString(username);
+		writeString(password);
+	}
+	
+	
+
 }

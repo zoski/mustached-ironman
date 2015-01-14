@@ -12,4 +12,15 @@ public class Writer extends BasicAbstractWriter {
 		super (outputStream);
 	}
 
+	public void respOK() {
+		writeInt(Protocol.CONNECT_OK);
+		// TOKEN 
+		System.out.println("Connection success");
+	}
+
+	public void respKO() {
+		writeInt(Protocol.CONNECT_KO);
+		System.out.println("Connection failed");
+	}
+
 }

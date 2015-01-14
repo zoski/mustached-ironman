@@ -22,10 +22,19 @@ public class SessionClient {
 		this.id = 0;
 	}
 
-	public boolean connect (String username, String userpassword) {
+	public boolean connect (String username, String password) {
 		try {
-			if (true) throw new IOException ("not yet implemented");
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+			
+			writer.reqConnect(username, password);
+			writer.send();//on sépare l'envoie au cas ou le message n'est plus envoyable. On à la possiblité d'envoyer
+			
+			reader.receive();
+			
+			
 			return true;
+			
 		} catch (IOException e) {
 			return false;
 		}

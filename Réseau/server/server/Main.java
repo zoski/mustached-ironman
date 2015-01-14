@@ -20,6 +20,7 @@ public class Main {
 				Socket connection = server.accept();
 				GameService service = new GameService (document, connection, ++count);
 				service.start ();
+				System.out.println("Accept");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

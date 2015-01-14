@@ -16,6 +16,14 @@ public class Reader extends BasicAbstractReader {
 		switch (type) {
 		case 0:
 			break;
+			
+		case Protocol.CONNECT_OK:
+			
+			break;
+		case Protocol.CONNECT_KO:
+			break;
+			
+		
 		}
 	}
 

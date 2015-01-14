@@ -13,20 +13,24 @@ import model.User;
 
 /**
  * 
- * @author michel
- * Gère la session coté serveur
+ * @author michel Gère la session coté serveur
  * 
  */
 public class SessionServer {
 
 	private Socket connection;
-	private Document document;	//le modèle métier
+	private Document document; // le modèle métier
 
 	public SessionServer(Document document, Socket connection) {
 		this.setDocument(document);
 		this.connection = connection;
 	}
 
+	/**
+	 * définit les différent cas en fonction du protocole
+	 * 
+	 * @return
+	 */
 	public boolean operate() {
 		try {
 			Writer writer = new Writer(connection.getOutputStream());
@@ -35,6 +39,19 @@ public class SessionServer {
 			switch (reader.getType()) {
 			case 0:
 				return false; // socket closed
+				
+			case Protocol.CONNECT: 
+				User user = document.connect(reader.getUsername(),
+						reader.getPassword());
+				if (user == null) {
+					writer.respKO();
+					writer.send();
+				} else {
+					writer.respOK();
+					writer.send();
+				}
+				break;
+
 			case -1:
 				break;
 			default:
