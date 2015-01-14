@@ -4,6 +4,13 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * 
+ * @author gael
+ * Représente le shop
+ * c'est une collection de Product
+ *
+ */
 public class Shop {
 
 	private Map<String, Product> products;

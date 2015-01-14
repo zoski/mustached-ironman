@@ -13,6 +13,7 @@ import network.Protocol;
  *
  * @author michel
  */
+
 public class Application {
     
 	private Socket socket;

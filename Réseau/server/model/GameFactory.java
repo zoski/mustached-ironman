@@ -4,7 +4,11 @@ import game.model.Category;
 import game.model.Product;
 
 import java.util.Random;
-
+/**
+ * 
+ * @author michel
+ * Base de donnée de tout les products qui peuvent finir dans le shop
+ */
 public class GameFactory {
 
 	private static Random rnd = new Random ();

@@ -1,5 +1,11 @@
 package game.model;
-
+/**
+ * 
+ * @author michel
+ * 
+ * Représente les différents objets du shop
+ *
+ */
 public class Product {
 
 	private Category category;

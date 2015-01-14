@@ -6,7 +6,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+/**
+ * 
+ * @author michel
+ * Permet la gestion des fichiers notamment des images
+ * Elles sont lu est transformée en tableau de byte dans le but
+ * d'être envoyé au client qui devra les écrire sur le disque depuis
+ * le tableau de byte en un fichier
+ * 
+ * /!\ aux chemins des fichiers sur le serveur ! 
+ *
+ */
 public class FileHelper {
 
 	public static String [] getDirectory () {
