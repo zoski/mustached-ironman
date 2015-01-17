@@ -15,6 +15,11 @@ public class SessionClient {
 	private Socket connection;
     private String name;
     private long id;
+    private int cash;
+    private String image;
+    
+    
+    private Player p;
 	
 	public SessionClient (Socket connection) {
 		this.connection = connection;
@@ -140,8 +145,35 @@ public class SessionClient {
 
 	public Player getStatistics () {
 		try {
-			if (true) throw new IOException ("not yet implemented");
+			//if (true) throw new IOException ("not yet implemented");
+			
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+			
+			writer.reqStat(name,id);
+			writer.send();
+			
+			reader.receive();
+			System.out.println("stats");
+			
+			if ( reader.getType() == Protocol.GET_STATS_OK )
+			{
+				cash = reader.cash;
+				image = reader.image;
+				System.out.println(cash);
+				System.out.println(image);
+			}
+			
+			if ( reader.getType() == Protocol.ADD_CASH_KO )
+			{
+				System.out.println("échec stats");
+			}
+			
+
 			return null;
+			
+			
+			
 		} catch (IOException e) {
 			return null;
 		}

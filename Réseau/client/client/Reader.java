@@ -8,7 +8,8 @@ import network.Protocol;
 public class Reader extends BasicAbstractReader {
 
 	long id;
-	
+	int cash;
+	String image;
 	
 	public Reader(InputStream inputStream) {
 		super (inputStream);
@@ -38,6 +39,14 @@ public class Reader extends BasicAbstractReader {
 			break;
 			
 		case Protocol.ADD_CASH_KO:
+			break;
+			
+		case Protocol.GET_STATS_OK:
+			cash = readInt();
+			image = readString();
+			break;
+			
+		case Protocol.GET_STATS_KO:
 			break;
 			
 		}

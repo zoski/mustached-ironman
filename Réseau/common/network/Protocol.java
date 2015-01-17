@@ -26,4 +26,12 @@ public interface Protocol {
 	public static final int ADD_CASH_OK = 21;
 	
 	public static final int ADD_CASH_KO = 22;
+	
+	
+	public static final int GET_STATS = 25;
+
+	public static final int GET_STATS_OK = 26;
+
+	public static final int GET_STATS_KO = 27;
+
 }

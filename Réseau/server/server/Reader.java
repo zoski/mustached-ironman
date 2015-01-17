@@ -49,6 +49,13 @@ public class Reader extends BasicAbstractReader {
 			
 			System.out.println(cash_asked);
 			break;
+			
+		case Protocol.GET_STATS:
+			username = readString();
+			id = readLong();
+			
+			break;
+			
 		}
 		
 	}

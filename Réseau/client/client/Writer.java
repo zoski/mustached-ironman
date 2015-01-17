@@ -32,6 +32,11 @@ public class Writer extends BasicAbstractWriter {
 		
 	}
 	
-	
+	public void reqStat(String name, long token) {
+		writeInt(Protocol.GET_STATS);
+		writeString(name);
+		writeLong(token);
+		
+	}
 
 }

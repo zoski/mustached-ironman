@@ -71,6 +71,15 @@ public class SessionServer {
 				break;
 				
 				
+			case Protocol.GET_STATS:
+				Account a = document.getStatistics(reader.getUsername(), reader.getId());
+				System.out.println(a);
+				if ( a != null){
+					writer.statsOK(a);
+				} else {
+					writer.statsKO();
+				}
+				
 			case -1:
 				break;
 				
