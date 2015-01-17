@@ -32,18 +32,57 @@ public class SessionClient {
 			
 			reader.receive();
 			
+			if ( reader.getType() == Protocol.CONNECT_OK )
+			{
+				id = reader.id;
+				name = username;
+				System.out.println(id);
+				System.out.println(name);
+				return true;
+			}
 			
-			return true;
+			if ( reader.getType() == Protocol.CONNECT_KO )
+			{
+				id = 0;
+				return false;
+			}
+			
+
+			return false;
 			
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
+	
 	public boolean disconnect () {
 		try {
-			if (true) throw new IOException ("not yet implemented");
-			return true;
+			//if (true) throw new IOException ("not yet implemented");
+			
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+			
+			writer.reqDisconnect(id,name);
+			writer.send();
+			
+			reader.receive();
+			
+			
+			if ( reader.getType() == Protocol.DISCONNECT_OK )
+			{
+				id = 0;
+				return true;
+			}
+			
+			if ( reader.getType() == Protocol.DISCONNECT_KO )
+			{
+				return false;
+			}
+			
+
+			return false;
+			
 		} catch (IOException e) {
 			return false;
 		}
@@ -51,8 +90,31 @@ public class SessionClient {
 
 	public boolean addCash (int amount) {
 		try {
-			if (true) throw new IOException ("not yet implemented");
-			return true;
+			//if (true) throw new IOException ("not yet implemented");
+			
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+			
+			writer.reqCash(name,id,amount);
+			writer.send();
+			
+			reader.receive();
+			System.out.println("cash");
+			
+			if ( reader.getType() == Protocol.ADD_CASH_OK )
+			{
+				return true;
+			}
+			
+			if ( reader.getType() == Protocol.ADD_CASH_KO )
+			{
+				return false;
+			}
+			
+
+			return false;
+			
+			
 		} catch (IOException e) {
 			return false;
 		}

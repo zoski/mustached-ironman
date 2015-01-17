@@ -6,12 +6,24 @@ public interface Protocol {
 
 	public static final Object EXIT_TEXT = "exit";
 	
+	
 	static final public int CONNECT = 1 ;	//représente le discriminant pr la connexion
 
 	public static final int CONNECT_OK = 10;
 
 	public static final int CONNECT_KO = 11;
+	
 
 	public static final int DISCONNECT = 14;
+	
+	public static final int DISCONNECT_OK = 15;
+	
+	public static final int DISCONNECT_KO = 16;
 
+	
+	public static final int ADD_CASH = 20;
+	
+	public static final int ADD_CASH_OK = 21;
+	
+	public static final int ADD_CASH_KO = 22;
 }

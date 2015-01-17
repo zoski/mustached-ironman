@@ -11,8 +11,9 @@ public class User {
 	public User(String name) {
 		super();
 		this.name = name;
-		this.id = time;
 		resetTime();
+		this.id = time;
+		
 	}
 
 	public String getName() {

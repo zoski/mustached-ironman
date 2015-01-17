@@ -37,6 +37,7 @@ public class SessionServer {
 			Reader reader = new Reader(connection.getInputStream());
 			reader.receive();
 			switch (reader.getType()) {
+			
 			case 0:
 				return false; // socket closed
 				
@@ -45,17 +46,38 @@ public class SessionServer {
 						reader.getPassword());
 				if (user == null) {
 					writer.respKO();
-					writer.send();
 				} else {
-					writer.respOK();
-					writer.send();
+					writer.respOK(user.getId()); // on envoie en paramètre ID (le token valide ou non..)
 				}
 				break;
 
+			case Protocol.DISCONNECT:
+				Boolean conn = document.disconnect(reader.getUsername(), reader.getId());
+				if(conn == true) {
+					writer.decoOK();
+				} else {
+					writer.decoKO();
+				}
+				break;
+				
+			case Protocol.ADD_CASH:
+				boolean bool = document.addCash(reader.getUsername(), reader.getId(), reader.getCash());
+				System.out.println(bool);
+				if(bool == true) {
+					writer.cashOK();
+				} else {
+					writer.cashKO();
+				}
+				break;
+				
+				
 			case -1:
 				break;
+				
+				
 			default:
 				return false; // connection jammed
+				
 			}
 			writer.send();
 			return true;

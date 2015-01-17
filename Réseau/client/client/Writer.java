@@ -17,6 +17,21 @@ public class Writer extends BasicAbstractWriter {
 		writeString(password);
 	}
 	
+	public void reqDisconnect(long token,String name)
+	{
+		writeInt(Protocol.DISCONNECT);
+		writeLong(token);
+		writeString(name);
+	}
+
+	public void reqCash(String name, long token, int amount) {
+		writeInt(Protocol.ADD_CASH);
+		writeString(name);
+		writeLong(token);
+		writeInt(amount);
+		
+	}
+	
 	
 
 }

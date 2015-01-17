@@ -3,6 +3,7 @@ package server;
 import java.io.OutputStream;
 import java.util.Collection;
 
+import model.User;
 import network.BasicAbstractWriter;
 import network.Protocol;
 
@@ -12,9 +13,11 @@ public class Writer extends BasicAbstractWriter {
 		super (outputStream);
 	}
 
-	public void respOK() {
+	public void respOK(long id) {
+		
 		writeInt(Protocol.CONNECT_OK);
-		// TOKEN 
+		// TOKEN
+		writeLong(id);
 		System.out.println("Connection success");
 	}
 
@@ -22,5 +25,26 @@ public class Writer extends BasicAbstractWriter {
 		writeInt(Protocol.CONNECT_KO);
 		System.out.println("Connection failed");
 	}
+	
+	
+	public void decoKO() {
+		writeInt(Protocol.DISCONNECT_KO);
+		System.out.println("Disconnection failed");
+	}
 
+	public void decoOK() {
+		writeInt(Protocol.DISCONNECT_OK);
+		System.out.println("Disconnection success");
+	}
+	
+	public void cashOK() {
+		writeInt(Protocol.ADD_CASH_OK);
+		System.out.println("Cash success");
+	}
+	
+	public void cashKO() {
+		writeInt(Protocol.ADD_CASH_KO);
+		System.out.println("Cash fail");
+	}
+	
 }
