@@ -50,7 +50,7 @@ public class Writer extends BasicAbstractWriter {
 	}
 	
 	
-	public void statsOK(Account a) {
+	public void statsOK(Account a) { //yolo
 		writeInt(Protocol.GET_STATS_OK);
 		writeInt(a.getCash());
 		writeString(a.getImage());
