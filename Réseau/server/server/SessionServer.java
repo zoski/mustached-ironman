@@ -47,7 +47,7 @@ public class SessionServer {
 				if (user == null) {
 					writer.respKO();
 				} else {
-					writer.respOK(user.getId()); // on envoie en paramètre ID (le token valide ou non..)
+					writer.respOK(user.getId()); // on envoie en paramï¿½tre ID (le token valide ou non..)
 				}
 				break;
 
@@ -78,6 +78,16 @@ public class SessionServer {
 					writer.statsOK(a);
 				} else {
 					writer.statsKO();
+				}
+				
+			case Protocol.GET_INV:
+				
+				Collection<Product> cp = document.getProducts(reader.getUsername(), reader.getId());
+				System.out.println(cp);
+				if ( cp != null){
+					writer.invOK(cp);
+				} else {
+					writer.invKO();
 				}
 				
 			case -1:

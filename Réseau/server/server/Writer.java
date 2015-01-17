@@ -1,7 +1,11 @@
 package server;
 
+import game.model.Category;
+import game.model.Product;
+
 import java.io.OutputStream;
 import java.util.Collection;
+import java.util.Iterator;
 
 import model.Account;
 import model.User;
@@ -62,4 +66,31 @@ public class Writer extends BasicAbstractWriter {
 		System.out.println("Stats fail");
 	}
 	
+	
+	public void invKO() {
+		writeInt(Protocol.GET_INV_KO);
+		System.out.println("Inv fail");
+	}
+	
+	public void invOK(Collection<Product> cp) {
+		writeInt(Protocol.GET_INV_OK);
+		
+		Iterator<Product> it = cp.iterator();
+		int nb = cp.size();
+		writeInt(nb);
+
+		while(it.hasNext())
+		{
+			Product p = it.next();
+			writeString(p.getCategory().toString()); //			private Category category;
+			writeString(p.getName()); 				 //			private String name;
+			writeString(p.getImage());				 // 		private String image;
+			writeInt(p.getDuration());			     //         private int duration;
+			writeLong(p.getTime());			     	 //		 	private long time;
+			writeBoolean(p.isStackable());			 //			private boolean stackable;
+			writeInt(p.getCount());					 //			private int count;
+			nb++;
+		}
+		System.out.println("Inv Suck Sex");
+	}
 }

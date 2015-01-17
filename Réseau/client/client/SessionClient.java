@@ -32,7 +32,7 @@ public class SessionClient {
 			Writer writer = new Writer(connection.getOutputStream());
 			
 			writer.reqConnect(username, password);
-			writer.send();//on sépare l'envoie au cas ou le message n'est plus envoyable. On à la possiblité d'envoyer
+			writer.send();//on sÃ©pare l'envoie au cas ou le message n'est plus envoyable. On Ã  la possiblitÃ© d'envoyer
 			
 			reader.receive();
 			
@@ -158,13 +158,15 @@ public class SessionClient {
 			{
 				Player p = new Player(name, "./res/race-4.png", reader.cash);
 				System.out.println(p.getImage());
+				System.out.println(name);
+				System.out.println(reader.cash);
 				//"./res/"+reader.image+".png"
 				return p;
 			}
 			
 			if ( reader.getType() == Protocol.ADD_CASH_KO )
 			{
-				System.out.println("�chec stats");
+				System.out.println("échec stats");
 				return null;
 			}
 
@@ -177,8 +179,30 @@ public class SessionClient {
 
 	public Collection<Product> getProducts () {
 		try {
-			if (true) throw new IOException ("not yet implemented");
-			return null;
+			
+			//if (true) throw new IOException ("not yet implemented");
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+			
+			writer.reqInv(name,id);
+			writer.send();
+			
+			reader.receive();
+			System.out.println("inv");
+			
+			if ( reader.getType() == Protocol.GET_INV_OK )
+			{
+				return cp; // CREER LARRAY ICI ????????????????????
+			}
+			
+			if ( reader.getType() == Protocol.GET_INV_KO )
+			{
+				return null;
+			}
+			
+
+			
+			
 		} catch (IOException e) {
 			return null;
 		}

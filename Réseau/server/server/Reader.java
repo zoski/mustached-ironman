@@ -56,6 +56,12 @@ public class Reader extends BasicAbstractReader {
 			
 			break;
 			
+		case Protocol.GET_INV:
+			username = readString();
+			id = readLong();
+			
+			break;
+			
 		}
 		
 	}
