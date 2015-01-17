@@ -18,8 +18,7 @@ public class SessionClient {
     private int cash;
     private String image;
     
-    
-    private Player p;
+   
 	
 	public SessionClient (Socket connection) {
 		this.connection = connection;
@@ -154,25 +153,22 @@ public class SessionClient {
 			writer.send();
 			
 			reader.receive();
-			System.out.println("stats");
 			
 			if ( reader.getType() == Protocol.GET_STATS_OK )
 			{
-				cash = reader.cash;
-				image = reader.image;
-				System.out.println(cash);
-				System.out.println(image);
+				Player p = new Player(name, "./res/race-4.png", reader.cash);
+				System.out.println(p.getImage());
+				//"./res/"+reader.image+".png"
+				return p;
 			}
 			
 			if ( reader.getType() == Protocol.ADD_CASH_KO )
 			{
 				System.out.println("échec stats");
+				return null;
 			}
-			
 
 			return null;
-			
-			
 			
 		} catch (IOException e) {
 			return null;
@@ -225,11 +221,7 @@ public class SessionClient {
 	}
 
 	public String getImage (String imageName) {
-		try {
-			if (true) throw new IOException ("not yet implemented");
-			return "";
-		} catch (IOException e) {
-			return null;
-		}
+		//if (true) throw new IOException ("not yet implemented");
+		return imageName;
 	}
 }
