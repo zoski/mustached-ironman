@@ -78,6 +78,7 @@ public class SessionServer {
 				} else {
 					writer.statsKO();
 				}
+				break;
 				
 				
 			case Protocol.GET_INV:
@@ -88,6 +89,18 @@ public class SessionServer {
 				} else {
 					writer.invKO();
 				}
+				break;
+				
+			case Protocol.GET_SHOP:
+				Collection<Product> shop = document.getShop(reader.getUsername(), reader.getId());
+				System.out.println(shop);
+				if ( shop != null){
+					writer.shopOK(shop);
+				} else {
+					writer.shopKO();
+				}
+				break;
+				
 				
 			case -1:
 				break;

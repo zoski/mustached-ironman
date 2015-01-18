@@ -45,5 +45,13 @@ public class Writer extends BasicAbstractWriter {
 		writeLong(token);
 		
 	}
+	
+	public void reqShop(String name, long token) {
+		writeInt(Protocol.GET_SHOP);
+		writeString(name);
+		writeLong(token);
+		
+	}
+	
 
 }

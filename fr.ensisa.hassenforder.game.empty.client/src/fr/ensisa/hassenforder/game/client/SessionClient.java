@@ -189,9 +189,28 @@ public class SessionClient {
 
 	public Collection<Product> getShop() {
 		try {
-			if (true)
-				throw new IOException("not yet implemented");
+			
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+			
+			writer.reqShop(name,id);
+			writer.send();
+			
+			reader.receive();
+			System.out.println("Réception du shop");
+			
+			if ( reader.getType() == Protocol.GET_SHOP_OK ) {
+				//FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
+				//return reader.shop; 
+			}
+			
+			if ( reader.getType() == Protocol.GET_SHOP_KO )
+			{
+				return null;
+			}
 			return null;
+			
+			
 		} catch (IOException e) {
 			return null;
 		}

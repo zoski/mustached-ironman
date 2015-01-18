@@ -42,4 +42,10 @@ public interface Protocol {
 	public static final int GET_INV_KO = 32;
 
 
+	public static final int GET_SHOP = 35;
+	
+	public static final int GET_SHOP_OK = 36;
+	
+	public static final int GET_SHOP_KO = 37;
+	
 }

@@ -19,6 +19,7 @@ public class Reader extends BasicAbstractReader {
 	byte[] imgBytes;
 	
 	Collection<Product> inventory = new ArrayList<Product>();
+	Collection<Product> shop = new ArrayList<Product>();
 
 	
 	public Reader(InputStream inputStream) {
@@ -90,6 +91,17 @@ public class Reader extends BasicAbstractReader {
 		break;
 		
 		case Protocol.GET_INV_KO:
+			break;
+			
+			
+		case Protocol.GET_SHOP_KO:
+			break;
+			
+		case Protocol.GET_SHOP_OK:
+			
+			
+			
+			
 			break;
 			
 		}

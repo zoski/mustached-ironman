@@ -104,5 +104,23 @@ public class Writer extends BasicAbstractWriter {
 		System.out.println("Inv Suck Sex");
 	}
 	
+	
+	
+	public void shopKO() {
+		writeInt(Protocol.GET_SHOP_KO);
+		System.out.println("shop fail");
+	}
+	
+	
+	public void shopOK(Collection<Product> shop) {
+		writeInt(Protocol.GET_SHOP_OK);
+		
+		
+		
+		System.out.println("shop success");
+	}
+	
+	
+	
 }
 
