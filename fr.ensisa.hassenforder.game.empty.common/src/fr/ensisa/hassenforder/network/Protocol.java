@@ -34,4 +34,5 @@ public interface Protocol {
 
 	public static final int GET_STATS_KO = 27;
 
+
 }

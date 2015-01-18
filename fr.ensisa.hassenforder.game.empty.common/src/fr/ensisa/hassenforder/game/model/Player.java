@@ -3,7 +3,7 @@ package fr.ensisa.hassenforder.game.model;
 public class Player {
 
 	private String name;
-	private String image;
+	private String image="./empty.png";
 	protected int cash;
 
 	public Player(String name, String image, int cash) {
@@ -24,5 +24,13 @@ public class Player {
 	public int getCash() {
 		return cash;
 	}
+
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", image=" + image + ", cash=" + cash
+				+ "]";
+	}
+	
+	
 	
 }

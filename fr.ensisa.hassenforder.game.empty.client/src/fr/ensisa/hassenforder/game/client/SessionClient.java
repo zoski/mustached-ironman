@@ -12,129 +12,120 @@ import fr.ensisa.hassenforder.network.Protocol;
 public class SessionClient {
 
 	private Socket connection;
-    private String name;
-    private long id;
-    private int cash;
-    private String image;
-    
-   
-	
-	public SessionClient (Socket connection) {
+	private String name;
+	private long id;
+	private int cash;
+	private String image;
+
+	public SessionClient(Socket connection) {
 		this.connection = connection;
 		this.name = null;
 		this.id = 0;
 	}
 
-	public boolean connect (String username, String password) {
+	public boolean connect(String username, String password) {
 		try {
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
-			
+
 			writer.reqConnect(username, password);
-			writer.send();//on sépare l'envoie au cas ou le message n'est plus envoyable. On à la possiblité d'envoyer
-			
+			writer.send();// on sépare l'envoie au cas ou le message n'est plus
+							// envoyable. On à la possiblité d'envoyer
+
 			reader.receive();
-			
-			if ( reader.getType() == Protocol.CONNECT_OK )
-			{
+
+			if (reader.getType() == Protocol.CONNECT_OK) {
 				id = reader.id;
 				name = username;
-				System.out.println(id);
-				System.out.println(name);
+				System.out.println("Connexion OK");
+				System.out.println("id= "+ id);
+				System.out.println("name= "+ name);
 				return true;
 			}
-			
-			if ( reader.getType() == Protocol.CONNECT_KO )
-			{
+
+			if (reader.getType() == Protocol.CONNECT_KO) {
 				id = 0;
+				System.out.println("Connexion KO");
 				return false;
 			}
-			
 
 			return false;
-			
+
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
-	
-	public boolean disconnect () {
+	public boolean disconnect() {
 		try {
-			//if (true) throw new IOException ("not yet implemented");
-			
+			// if (true) throw new IOException ("not yet implemented");
+
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
-			
-			writer.reqDisconnect(id,name);
+
+			writer.reqDisconnect(id, name);
 			writer.send();
-			
+
 			reader.receive();
-			
-			
-			if ( reader.getType() == Protocol.DISCONNECT_OK )
-			{
+
+			if (reader.getType() == Protocol.DISCONNECT_OK) {
 				id = 0;
 				return true;
 			}
-			
-			if ( reader.getType() == Protocol.DISCONNECT_KO )
-			{
+
+			if (reader.getType() == Protocol.DISCONNECT_KO) {
 				return false;
 			}
-			
 
 			return false;
-			
+
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
-	public boolean addCash (int amount) {
+	public boolean addCash(int amount) {
 		try {
-			//if (true) throw new IOException ("not yet implemented");
-			
+			// if (true) throw new IOException ("not yet implemented");
+
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
-			
-			writer.reqCash(name,id,amount);
+
+			writer.reqCash(name, id, amount);
 			writer.send();
-			
+
 			reader.receive();
 			System.out.println("cash");
-			
-			if ( reader.getType() == Protocol.ADD_CASH_OK )
-			{
+
+			if (reader.getType() == Protocol.ADD_CASH_OK) {
 				return true;
 			}
-			
-			if ( reader.getType() == Protocol.ADD_CASH_KO )
-			{
+
+			if (reader.getType() == Protocol.ADD_CASH_KO) {
 				return false;
 			}
-			
 
 			return false;
-			
-			
+
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
-	public boolean clearProducts () {
+	public boolean clearProducts() {
 		try {
-			if (true) throw new IOException ("not yet implemented");
+			if (true)
+				throw new IOException("not yet implemented");
 			return true;
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
-	public boolean consumeProducts () {
+	public boolean consumeProducts() {
 		try {
-			if (true) throw new IOException ("not yet implemented");
+			if (true)
+				throw new IOException("not yet implemented");
 			return true;
 		} catch (IOException e) {
 			return false;
@@ -143,8 +134,6 @@ public class SessionClient {
 
 	public Player getStatistics () {
 		try {
-			//if (true) throw new IOException ("not yet implemented");
-			
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
 			
@@ -155,72 +144,79 @@ public class SessionClient {
 			
 			if ( reader.getType() == Protocol.GET_STATS_OK )
 			{
-				Player p = new Player(name, "./res/race-4.png", reader.cash);
-				System.out.println(p.getImage());
-				//"./res/"+reader.image+".png"
+				String imgPath = getImage("race-4");
+				Player p = new Player(name, imgPath, reader.cash);
+				System.out.println(p.toString());
+//				System.out.println("imgPath : " + imgPath);
 				return p;
 			}
 			
-			if ( reader.getType() == Protocol.ADD_CASH_KO )
+			if ( reader.getType() == Protocol.GET_STATS_KO )
 			{
 				System.out.println("échec stats");
 				return null;
 			}
 
-			return null;
-			
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			return null;
 		}
+		return null;
+		
 	}
 
-	public Collection<Product> getProducts () {
+	public Collection<Product> getProducts() {
 		try {
-			if (true) throw new IOException ("not yet implemented");
-			return null;
-		} catch (IOException e) {
-			return null;
-		}
-	}
-
-	public Collection<Product> getShop () {
-		try {
-			if (true) throw new IOException ("not yet implemented");
+			if (true)
+				throw new IOException("not yet implemented");
 			return null;
 		} catch (IOException e) {
 			return null;
 		}
 	}
 
-	public boolean refreshShop () {
+	public Collection<Product> getShop() {
 		try {
-			if (true) throw new IOException ("not yet implemented");
+			if (true)
+				throw new IOException("not yet implemented");
+			return null;
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	public boolean refreshShop() {
+		try {
+			if (true)
+				throw new IOException("not yet implemented");
 			return true;
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
-	public boolean buyProduct (String productName) {
+	public boolean buyProduct(String productName) {
 		try {
-			if (true) throw new IOException ("not yet implemented");
+			if (true)
+				throw new IOException("not yet implemented");
 			return true;
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
-	public boolean sellProduct (String productName) {
+	public boolean sellProduct(String productName) {
 		try {
-			if (true) throw new IOException ("not yet implemented");
+			if (true)
+				throw new IOException("not yet implemented");
 			return true;
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
-	public String getImage (String imageName) {
-		//if (true) throw new IOException ("not yet implemented");
-		return imageName;
+	public String getImage(String imageName) {
+		
+		return "./res/"+imageName+".png";
 	}
 }
