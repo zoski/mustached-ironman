@@ -145,7 +145,7 @@ public class Writer extends BasicAbstractWriter {
 	}
 	
 	public void refreshOK() {
-		writeInt(Protocol.REFRESH_SHOP_KO);
+		writeInt(Protocol.REFRESH_SHOP_OK);
 		System.out.println("refresh gud");
 	}
 	

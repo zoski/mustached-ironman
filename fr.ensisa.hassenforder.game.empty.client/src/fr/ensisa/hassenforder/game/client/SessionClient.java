@@ -228,6 +228,7 @@ public class SessionClient {
 			System.out.println("Refresh du shop");
 			
 			if ( reader.getType() == Protocol.REFRESH_SHOP_OK ) {
+				System.out.println("come here nigaga");
 				return true; 
 			}
 			
