@@ -62,7 +62,7 @@ public class Writer extends BasicAbstractWriter {
 		writeInt(a.getCash());					//cash
 		writeString(a.getImage());				//nom image
 		byte[] img = FileHelper.readContent("./res/"+a.getImage()+".png");				
-		writeLong(img.length);					//taille image
+		writeLong(FileHelper.getFileSize("./res/"+a.getImage()+".png"));					//taille image
 		writeBytes(img);			//byte[] représentant l'image
 												
 		System.out.println("Stats success");
@@ -94,7 +94,7 @@ public class Writer extends BasicAbstractWriter {
 			writeString(p.getName()); 				 //			private String name;
 			writeString(p.getImage());				 // 		private String image;
 			byte[] img = FileHelper.readContent("./res/"+p.getImage()+".png");
-			writeLong(img.length);					//		taille image
+			writeLong(FileHelper.getFileSize("./res/"+p.getImage()+".png"));					//		taille image
 			writeBytes(img);						//		byte[] représentant l'image
 			writeInt(p.getDuration());			     //         private int duration;
 			writeBoolean(p.isStackable());			 //			private boolean stackable;
@@ -127,7 +127,7 @@ public class Writer extends BasicAbstractWriter {
 			writeString(p.getName()); 				 //			private String name;
 			writeString(p.getImage());				 // 		private String image;
 			byte[] img = FileHelper.readContent("./res/"+p.getImage()+".png");
-			writeLong(img.length);					//		taille image
+			writeLong(FileHelper.getFileSize("./res/"+p.getImage()+".png"));					//		taille image
 			writeBytes(img);						//		byte[] représentant l'image
 			writeInt(p.getDuration());			     //         private int duration;
 			writeBoolean(p.isStackable());			 //			private boolean stackable;
