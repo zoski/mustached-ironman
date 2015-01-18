@@ -33,6 +33,13 @@ public interface Protocol {
 	public static final int GET_STATS_OK = 26;
 
 	public static final int GET_STATS_KO = 27;
+	
+	
+	public static final int GET_INV = 30;
+	
+	public static final int GET_INV_OK = 31;
+	
+	public static final int GET_INV_KO = 32;
 
 
 }

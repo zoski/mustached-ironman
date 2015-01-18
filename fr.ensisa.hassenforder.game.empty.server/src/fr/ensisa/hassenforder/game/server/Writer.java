@@ -9,7 +9,6 @@ import java.util.Iterator;
 
 
 
-
 import fr.ensisa.hassenforder.game.model.Account;
 import fr.ensisa.hassenforder.network.BasicAbstractWriter;
 import fr.ensisa.hassenforder.network.FileHelper;

@@ -18,6 +18,7 @@ public class Reader extends BasicAbstractReader {
 	byte[] imgBytes;
 	
 	Collection<Product> cp;
+
 	
 	public Reader(InputStream inputStream) {
 		super (inputStream);
