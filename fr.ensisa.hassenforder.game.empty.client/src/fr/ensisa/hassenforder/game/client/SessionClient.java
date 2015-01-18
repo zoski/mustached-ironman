@@ -200,8 +200,8 @@ public class SessionClient {
 			System.out.println("Réception du shop");
 			
 			if ( reader.getType() == Protocol.GET_SHOP_OK ) {
-				//FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
-				//return reader.shop; 
+				FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
+				return reader.shop; 
 			}
 			
 			if ( reader.getType() == Protocol.GET_SHOP_KO )

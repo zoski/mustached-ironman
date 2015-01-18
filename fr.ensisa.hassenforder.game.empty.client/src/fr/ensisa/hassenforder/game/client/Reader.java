@@ -99,7 +99,29 @@ public class Reader extends BasicAbstractReader {
 			
 		case Protocol.GET_SHOP_OK:
 			
-			
+			int sizeShop = readInt();
+			System.out.println("Nombre d'élement dans le shop " +sizeShop);
+			for (int i=0;i<sizeShop;i++)
+			{
+				String catStr = readString();
+				Category category = Category.valueOf(catStr);
+				String itemName = readString();
+				
+				String imgPath = "./res/"+readString()+".png";
+				length = readLong();
+				imgBytes = readBytes(length);
+				FileHelper.writeContent(imgPath, imgBytes);		// Sauvegarde l'image -> fonctinne
+				
+				int duration = readInt();
+				boolean stackable = readBoolean();
+				int quantity = readInt();
+				long time = readLong();
+				Product p = new Product(category, itemName, imgPath, duration, stackable, quantity, time);
+				System.out.println(p.toString());
+				shop.add(p);
+				
+			}
+			System.out.println("Tout à été envoyé");
 			
 			
 			break;
