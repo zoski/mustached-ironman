@@ -144,10 +144,8 @@ public class SessionClient {
 			
 			if ( reader.getType() == Protocol.GET_STATS_OK )
 			{
-				String imgPath = getImage("race-4");
-				Player p = new Player(name, imgPath, reader.cash);
+				Player p = new Player(name,getImage("./res/"+reader.image+".png") , reader.cash);
 				System.out.println(p.toString());
-//				System.out.println("imgPath : " + imgPath);
 				return p;
 			}
 			
@@ -217,6 +215,6 @@ public class SessionClient {
 
 	public String getImage(String imageName) {
 		
-		return "./res/"+imageName+".png";
+		return imageName;
 	}
 }
