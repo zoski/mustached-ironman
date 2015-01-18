@@ -96,7 +96,7 @@ public class Writer extends BasicAbstractWriter {
 			writeInt(p.getDuration());			     //         private int duration;
 			writeBoolean(p.isStackable());			 //			private boolean stackable;
 			writeInt(p.getCount());					 //			private int count;
-			//writeLong(p.getTime());			     	 //		 	private long time;
+			writeLong(p.getTime());			     	 //		 	private long time;
 		}
 		System.out.println("Inv Suck Sex");
 	}
