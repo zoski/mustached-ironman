@@ -3,6 +3,7 @@ package fr.ensisa.hassenforder.game.client;
 import java.io.InputStream;
 
 import fr.ensisa.hassenforder.network.BasicAbstractReader;
+import fr.ensisa.hassenforder.network.FileHelper;
 import fr.ensisa.hassenforder.network.Protocol;
 
 public class Reader extends BasicAbstractReader {
@@ -10,6 +11,8 @@ public class Reader extends BasicAbstractReader {
 	long id;
 	int cash;
 	String image;
+	long length;
+	byte[] imgBytes;
 	
 	public Reader(InputStream inputStream) {
 		super (inputStream);
@@ -44,6 +47,8 @@ public class Reader extends BasicAbstractReader {
 		case Protocol.GET_STATS_OK:
 			cash = readInt();
 			image = readString();
+			length = readLong();
+			imgBytes = readBytes(length);
 			break;
 			
 		case Protocol.GET_STATS_KO:

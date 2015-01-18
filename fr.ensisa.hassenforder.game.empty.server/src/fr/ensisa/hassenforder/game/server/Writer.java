@@ -5,8 +5,10 @@ import java.util.Collection;
 
 
 
+
 import fr.ensisa.hassenforder.game.model.Account;
 import fr.ensisa.hassenforder.network.BasicAbstractWriter;
+import fr.ensisa.hassenforder.network.FileHelper;
 import fr.ensisa.hassenforder.network.Protocol;
 
 public class Writer extends BasicAbstractWriter {
@@ -52,9 +54,13 @@ public class Writer extends BasicAbstractWriter {
 	
 	
 	public void statsOK(Account a) { //yolo
-		writeInt(Protocol.GET_STATS_OK);
-		writeInt(a.getCash());
-		writeString(a.getImage());
+		writeInt(Protocol.GET_STATS_OK);		//discriminant
+		writeInt(a.getCash());					//cash
+		writeString(a.getImage());				//nom image
+		byte[] img = FileHelper.readContent("./res/"+a.getImage()+".png");				
+		writeLong(img.length);					//taille image
+		writeBytes(img);			//byte[] représentant l'image
+												
 		System.out.println("Stats success");
 	}
 	

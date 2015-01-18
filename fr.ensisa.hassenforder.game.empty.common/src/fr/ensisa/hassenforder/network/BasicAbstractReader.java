@@ -54,6 +54,24 @@ public class BasicAbstractReader {
 			return "";
 		}
 	}
+	
+	/**
+	 * Permet de lire un tableau de byte depuis l'inputStream
+	 * @param length	: taille du tableau de byte à lire
+	 * @return			: un tableau de byte 
+	 */
+	protected byte[] readBytes(long length) {
+		try { 
+			byte[] readedBytes = new byte[(int) length];
+			for(int i=0; i<length ; i++) {
+				readedBytes[i]=inputStream.readByte();
+			}
+			return readedBytes;
+		} catch (IOException e) {
+			System.out.println("Lecture du tableau de byte impossible");
+			return null;
+		}
+	}
 
 	public int getType() {
 		return type;

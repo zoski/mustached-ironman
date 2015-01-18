@@ -46,7 +46,7 @@ public class SessionServer {
 				if (user == null) {
 					writer.respKO();
 				} else {
-					writer.respOK(user.getId()); // on envoie en param�tre ID (le token valide ou non..)
+					writer.respOK(user.getId()); // on envoie en paramétre ID (le token valide ou non..)
 				}
 				break;
 
