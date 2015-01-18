@@ -88,4 +88,13 @@ public class Product {
 		return time + duration * 1000 - System.currentTimeMillis();
 	}
 
+	@Override
+	public String toString() {
+		return "Product [category=" + category + ", name=" + name + ", image="
+				+ image + ", duration=" + duration + ", time=" + time
+				+ ", stackable=" + stackable + ", count=" + count + "]";
+	}
+	
+	
+
 }

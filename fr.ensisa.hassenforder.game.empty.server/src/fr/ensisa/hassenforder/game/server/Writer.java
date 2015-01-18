@@ -93,6 +93,9 @@ public class Writer extends BasicAbstractWriter {
 			writeString(p.getCategory().toString()); //			private Category category;
 			writeString(p.getName()); 				 //			private String name;
 			writeString(p.getImage());				 // 		private String image;
+			byte[] img = FileHelper.readContent("./res/"+p.getImage()+".png");
+			writeLong(img.length);					//		taille image
+			writeBytes(img);						//		byte[] représentant l'image
 			writeInt(p.getDuration());			     //         private int duration;
 			writeBoolean(p.isStackable());			 //			private boolean stackable;
 			writeInt(p.getCount());					 //			private int count;

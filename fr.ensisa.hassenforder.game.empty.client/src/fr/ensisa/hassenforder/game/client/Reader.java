@@ -64,38 +64,26 @@ public class Reader extends BasicAbstractReader {
 		case Protocol.GET_INV_OK:
 			
 			int size = readInt();
-			int i;
-			System.out.println(size);
-			for (i=0;i<size;i++)
+			System.out.println("Nombre d'élement dans l'inventaire " +size);
+			for (int i=0;i<size;i++)
 			{
-				String str = readString();
-				Category cat = Category.valueOf(str);
-				System.out.println(cat);
+				String catStr = readString();
+				Category category = Category.valueOf(catStr);
+				String itemName = readString();
 				
-				String s = readString();
-				System.out.println(s);
+				String imgPath = "./res/"+readString()+".png";
+				length = readLong();
+				imgBytes = readBytes(length);
+				FileHelper.writeContent(imgPath, imgBytes);		// Sauvegarde l'image -> fonctinne
 				
-				String s2 = "./res/"+readString()+".png";
-				System.out.println(s2);
-				
-				int er = readInt();
-				System.out.println(er);
-				
-				boolean b = readBoolean();
-				System.out.println(b);
-				
-				int idf = readInt();
-				System.out.println(idf);
-				
-				long llglg = readLong();
-				System.out.println(llglg);
-				
-				Product p = new Product(cat, s, s2, er, b, idf);
-				System.out.println(p);
-
-				boolean e = cp.add(p);
-				System.out.println(e);
+				int duration = readInt();
+				boolean stackable = readBoolean();
+				int quantity = readInt();
+				long time = readLong(); System.out.println("Le temps :" + time);
+				Product p = new Product(category, itemName, imgPath, duration, stackable, quantity);
+				System.out.println(p.toString());
 			}
+			System.out.println("Tout à été envoyé");
 
 		break;
 		
