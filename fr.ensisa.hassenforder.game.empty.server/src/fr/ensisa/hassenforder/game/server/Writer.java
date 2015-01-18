@@ -5,9 +5,16 @@ import java.util.Collection;
 
 
 
+import java.util.Iterator;
+
+
+
+
 import fr.ensisa.hassenforder.game.model.Account;
 import fr.ensisa.hassenforder.network.BasicAbstractWriter;
+import fr.ensisa.hassenforder.network.FileHelper;
 import fr.ensisa.hassenforder.network.Protocol;
+import fr.ensisa.hassenforder.game.model.Product;
 
 public class Writer extends BasicAbstractWriter {
 
@@ -52,15 +59,47 @@ public class Writer extends BasicAbstractWriter {
 	
 	
 	public void statsOK(Account a) { //yolo
-		writeInt(Protocol.GET_STATS_OK);
-		writeInt(a.getCash());
-		writeString(a.getImage());
+		writeInt(Protocol.GET_STATS_OK);		//discriminant
+		writeInt(a.getCash());					//cash
+		writeString(a.getImage());				//nom image
+		byte[] img = FileHelper.readContent("./res/"+a.getImage()+".png");				
+		writeLong(img.length);					//taille image
+		writeBytes(img);			//byte[] représentant l'image
+												
 		System.out.println("Stats success");
 	}
 	
 	public void statsKO() {
 		writeInt(Protocol.GET_STATS_KO);
 		System.out.println("Stats fail");
+	}
+	
+	
+	
+	public void invKO() {
+		writeInt(Protocol.GET_INV_KO);
+		System.out.println("Inv fail");
+	}
+	
+	public void invOK(Collection<Product> cp) {
+		writeInt(Protocol.GET_INV_OK);
+		
+		Iterator<Product> it = cp.iterator();
+		int nb = cp.size();
+		writeInt(nb);
+
+		while(it.hasNext())
+		{
+			Product p = it.next();
+			writeString(p.getCategory().toString()); //			private Category category;
+			writeString(p.getName()); 				 //			private String name;
+			writeString(p.getImage());				 // 		private String image;
+			writeInt(p.getDuration());			     //         private int duration;
+			writeBoolean(p.isStackable());			 //			private boolean stackable;
+			writeInt(p.getCount());					 //			private int count;
+			//writeLong(p.getTime());			     	 //		 	private long time;
+		}
+		System.out.println("Inv Suck Sex");
 	}
 	
 }
