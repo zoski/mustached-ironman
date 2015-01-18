@@ -101,6 +101,16 @@ public class SessionServer {
 				}
 				break;
 				
+			case Protocol.REFRESH_SHOP:
+				boolean b = document.refreshShop(reader.getUsername(), reader.getId());
+				System.out.println(b);
+				if ( b == true){
+					writer.refreshOK();
+				} else {
+					writer.refreshKO();
+				}
+				break;
+				
 				
 			case -1:
 				break;

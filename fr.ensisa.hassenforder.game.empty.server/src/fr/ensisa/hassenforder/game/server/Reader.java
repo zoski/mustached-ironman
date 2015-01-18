@@ -59,6 +59,11 @@ public class Reader extends BasicAbstractReader {
 			id = readLong();
 			break;
 			
+		case Protocol.REFRESH_SHOP:
+			username = readString();
+			id = readLong();
+			break;
+			
 		}
 		
 	}

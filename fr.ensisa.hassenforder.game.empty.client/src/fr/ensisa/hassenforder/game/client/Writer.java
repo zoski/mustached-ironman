@@ -53,5 +53,11 @@ public class Writer extends BasicAbstractWriter {
 		
 	}
 	
+	public void reqRefresh(String name, long token) {
+		writeInt(Protocol.REFRESH_SHOP);
+		writeString(name);
+		writeLong(token);
+		
+	}
 
 }

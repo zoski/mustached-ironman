@@ -139,6 +139,16 @@ public class Writer extends BasicAbstractWriter {
 	}
 	
 	
+	public void refreshKO() {
+		writeInt(Protocol.REFRESH_SHOP_KO);
+		System.out.println("refresh fail");
+	}
+	
+	public void refreshOK() {
+		writeInt(Protocol.REFRESH_SHOP_KO);
+		System.out.println("refresh gud");
+	}
+	
 	
 }
 

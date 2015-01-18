@@ -48,4 +48,13 @@ public interface Protocol {
 	
 	public static final int GET_SHOP_KO = 37;
 	
+
+
+	public static final int REFRESH_SHOP = 40;
+	
+	public static final int REFRESH_SHOP_OK = 41;
+	
+	public static final int REFRESH_SHOP_KO = 42;
+	
+	
 }

@@ -122,8 +122,14 @@ public class Reader extends BasicAbstractReader {
 				
 			}
 			System.out.println("Tout à été envoyé");
+			break;
 			
 			
+		case Protocol.REFRESH_SHOP_KO:
+			break;
+			
+			
+		case Protocol.REFRESH_SHOP_OK:
 			break;
 			
 		}

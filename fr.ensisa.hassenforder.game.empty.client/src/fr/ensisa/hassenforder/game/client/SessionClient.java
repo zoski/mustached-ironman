@@ -218,9 +218,24 @@ public class SessionClient {
 
 	public boolean refreshShop() {
 		try {
-			if (true)
-				throw new IOException("not yet implemented");
-			return true;
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+			
+			writer.reqRefresh(name,id);
+			writer.send();
+			
+			reader.receive();
+			System.out.println("Refresh du shop");
+			
+			if ( reader.getType() == Protocol.REFRESH_SHOP_OK ) {
+				return true; 
+			}
+			
+			if ( reader.getType() == Protocol.REFRESH_SHOP_KO )
+			{
+				return false;
+			}
+			return false;
 		} catch (IOException e) {
 			return false;
 		}
