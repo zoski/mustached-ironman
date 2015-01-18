@@ -17,6 +17,7 @@ public class SessionClient {
 	private long id;
 	private int cash;
 	private String image;
+	private byte[] imgBytes;
 
 	public SessionClient(Socket connection) {
 		this.connection = connection;
@@ -59,8 +60,6 @@ public class SessionClient {
 
 	public boolean disconnect() {
 		try {
-			// if (true) throw new IOException ("not yet implemented");
-
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
 
@@ -87,8 +86,6 @@ public class SessionClient {
 
 	public boolean addCash(int amount) {
 		try {
-			// if (true) throw new IOException ("not yet implemented");
-
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
 
@@ -143,8 +140,10 @@ public class SessionClient {
 			
 			reader.receive();
 			
-			if ( reader.getType() == Protocol.GET_STATS_OK )
-			{
+			if ( reader.getType() == Protocol.GET_STATS_OK ) {
+				/* Sauvegarde de l'image */
+				FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
+				
 				Player p = new Player(name,getImage("./res/"+reader.image+".png") , reader.cash);
 				System.out.println(p.toString());
 				return p;

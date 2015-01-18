@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.Collection;
 
 import fr.ensisa.hassenforder.network.BasicAbstractReader;
+import fr.ensisa.hassenforder.network.FileHelper;
 import fr.ensisa.hassenforder.network.Protocol;
 import fr.ensisa.hassenforder.game.model.Category;
 import fr.ensisa.hassenforder.game.model.Product;
@@ -13,6 +14,8 @@ public class Reader extends BasicAbstractReader {
 	long id;
 	int cash;
 	String image;
+	long length;
+	byte[] imgBytes;
 	
 	Collection<Product> cp;
 	
@@ -49,6 +52,8 @@ public class Reader extends BasicAbstractReader {
 		case Protocol.GET_STATS_OK:
 			cash = readInt();
 			image = readString();
+			length = readLong();
+			imgBytes = readBytes(length);
 			break;
 			
 		case Protocol.GET_STATS_KO:
