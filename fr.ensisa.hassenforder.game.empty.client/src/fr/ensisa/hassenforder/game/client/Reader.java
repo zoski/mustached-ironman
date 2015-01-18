@@ -18,7 +18,7 @@ public class Reader extends BasicAbstractReader {
 	long length;
 	byte[] imgBytes;
 	
-	Collection<Product> cp = new ArrayList<Product>();
+	Collection<Product> inventory = new ArrayList<Product>();
 
 	
 	public Reader(InputStream inputStream) {
@@ -79,9 +79,11 @@ public class Reader extends BasicAbstractReader {
 				int duration = readInt();
 				boolean stackable = readBoolean();
 				int quantity = readInt();
-				long time = readLong(); System.out.println("Le temps :" + time);
-				Product p = new Product(category, itemName, imgPath, duration, stackable, quantity);
+				long time = readLong();
+				Product p = new Product(category, itemName, imgPath, duration, stackable, quantity, time);
 				System.out.println(p.toString());
+				inventory.add(p);
+				
 			}
 			System.out.println("Tout à été envoyé");
 

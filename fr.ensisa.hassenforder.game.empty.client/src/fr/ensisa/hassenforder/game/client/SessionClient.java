@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Collection;
 
+
 import fr.ensisa.hassenforder.game.model.Player;
 import fr.ensisa.hassenforder.game.model.Product;
 import fr.ensisa.hassenforder.network.FileHelper;
@@ -14,7 +15,7 @@ public class SessionClient {
 	private Socket connection;
 	private String name;
 	private long id;
-
+	
 	public SessionClient(Socket connection) {
 		this.connection = connection;
 		this.name = null;
@@ -36,8 +37,8 @@ public class SessionClient {
 				id = reader.id;
 				name = username;
 				System.out.println("Connexion OK");
-				System.out.println("id= " + id);
-				System.out.println("name= " + name);
+				System.out.println("id= "+ id);
+				System.out.println("name= "+ name);
 				return true;
 			}
 
@@ -126,61 +127,61 @@ public class SessionClient {
 		}
 	}
 
-	public Player getStatistics() {
+	public Player getStatistics () {
 		try {
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
-
-			writer.reqStat(name, id);
+			
+			writer.reqStat(name,id);
 			writer.send();
-
+			
 			reader.receive();
-
-			if (reader.getType() == Protocol.GET_STATS_OK) {
+			
+			if ( reader.getType() == Protocol.GET_STATS_OK ) {
 				/* Sauvegarde de l'image */
-				FileHelper.writeContent(getImage("./res/" + reader.image
-						+ ".png"), reader.imgBytes);
-
-				Player p = new Player(name, getImage("./res/" + reader.image
-						+ ".png"), reader.cash);
+				FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
+				
+				Player p = new Player(name,getImage("./res/"+reader.image+".png") , reader.cash);
 				System.out.println(p.toString());
 				return p;
 			}
-
-			if (reader.getType() == Protocol.GET_STATS_KO) {
+			
+			if ( reader.getType() == Protocol.GET_STATS_KO )
+			{
 				System.out.println("échec stats");
 				return null;
 			}
 
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			return null;
 		}
 		return null;
-
+		
 	}
 
 	public Collection<Product> getProducts() {
 		try {
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
-
-			writer.reqInv(name, id);
+			
+			writer.reqInv(name,id);
 			writer.send();
-
+			
 			reader.receive();
 			System.out.println("Réception de l'inventaire");
-
-			if (reader.getType() == Protocol.GET_INV_OK) {
-				FileHelper.writeContent(getImage("./res/" + reader.image
-						+ ".png"), reader.imgBytes);
-				return reader.cp; // CREER LARRAY ICI ????????????????????
+			
+			if ( reader.getType() == Protocol.GET_INV_OK ) {
+				FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
+				return reader.inventory; // CREER LARRAY ICI ????????????????????
 			}
-
-			if (reader.getType() == Protocol.GET_INV_KO) {
+			
+			if ( reader.getType() == Protocol.GET_INV_KO )
+			{
 				return null;
 			}
 			return null;
-
+			
 		} catch (IOException e) {
 			return null;
 		}
@@ -227,7 +228,7 @@ public class SessionClient {
 	}
 
 	public String getImage(String imageName) {
-
+		
 		return imageName;
 	}
 }
