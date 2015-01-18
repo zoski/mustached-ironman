@@ -38,5 +38,12 @@ public class Writer extends BasicAbstractWriter {
 		writeLong(token);
 		
 	}
+	
+	public void reqInv(String name, long token) {
+		writeInt(Protocol.GET_INV);
+		writeString(name);
+		writeLong(token);
+		
+	}
 
 }

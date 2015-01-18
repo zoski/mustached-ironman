@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Collection;
 
+
 import fr.ensisa.hassenforder.game.model.Player;
 import fr.ensisa.hassenforder.game.model.Product;
 import fr.ensisa.hassenforder.network.FileHelper;
@@ -165,9 +166,27 @@ public class SessionClient {
 
 	public Collection<Product> getProducts() {
 		try {
-			if (true)
-				throw new IOException("not yet implemented");
+			//if (true) throw new IOException ("not yet implemented");
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+			
+			writer.reqInv(name,id);
+			writer.send();
+			
+			reader.receive();
+			System.out.println("inv");
+			
+			if ( reader.getType() == Protocol.GET_INV_OK )
+			{
+				return reader.cp; // CREER LARRAY ICI ????????????????????
+			}
+			
+			if ( reader.getType() == Protocol.GET_INV_KO )
+			{
+				return null;
+			}
 			return null;
+			
 		} catch (IOException e) {
 			return null;
 		}
