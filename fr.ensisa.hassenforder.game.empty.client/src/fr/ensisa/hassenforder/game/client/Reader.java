@@ -1,6 +1,7 @@
 package fr.ensisa.hassenforder.game.client;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import fr.ensisa.hassenforder.network.BasicAbstractReader;
@@ -17,7 +18,7 @@ public class Reader extends BasicAbstractReader {
 	long length;
 	byte[] imgBytes;
 	
-	Collection<Product> cp;
+	Collection<Product> cp = new ArrayList<Product>();
 
 	
 	public Reader(InputStream inputStream) {
@@ -74,7 +75,7 @@ public class Reader extends BasicAbstractReader {
 				String s = readString();
 				System.out.println(s);
 				
-				String s2 = readString();
+				String s2 = "./res/"+readString()+".png";
 				System.out.println(s2);
 				
 				int er = readInt();
@@ -86,13 +87,13 @@ public class Reader extends BasicAbstractReader {
 				int idf = readInt();
 				System.out.println(idf);
 				
-				//long llglg = readLong();
-				//System.out.println(llglg);
+				long llglg = readLong();
+				System.out.println(llglg);
 				
 				Product p = new Product(cat, s, s2, er, b, idf);
 				System.out.println(p);
 
-				boolean e = cp.add(new Product(Category.AMMO, "nom", "image", 62, true, 5));
+				boolean e = cp.add(p);
 				System.out.println(e);
 			}
 
