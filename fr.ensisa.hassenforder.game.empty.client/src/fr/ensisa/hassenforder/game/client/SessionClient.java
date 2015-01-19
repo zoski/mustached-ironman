@@ -64,18 +64,14 @@ public class SessionClient {
 			writer.send();
 
 			reader.receive();
-
 			if (reader.getType() == Protocol.DISCONNECT_OK) {
 				id = 0;
 				return true;
 			}
-
 			if (reader.getType() == Protocol.DISCONNECT_KO) {
 				return false;
 			}
-
 			return false;
-
 		} catch (IOException e) {
 			return false;
 		}
@@ -95,13 +91,10 @@ public class SessionClient {
 			if (reader.getType() == Protocol.ADD_CASH_OK) {
 				return true;
 			}
-
 			if (reader.getType() == Protocol.ADD_CASH_KO) {
 				return false;
 			}
-
 			return false;
-
 		} catch (IOException e) {
 			return false;
 		}
@@ -122,12 +115,10 @@ public class SessionClient {
 			if (reader.getType() == Protocol.CLEAR_OK) {
 				return true;
 			}
-
 			if (reader.getType() == Protocol.CLEAR_KO) {
 				return false;
 			}
 			return false;
-			
 		} catch (IOException e) {
 			return false;
 		}
@@ -135,8 +126,6 @@ public class SessionClient {
 
 	public boolean consumeProducts() {
 		try {
-			
-			
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
 
@@ -149,13 +138,10 @@ public class SessionClient {
 			if (reader.getType() == Protocol.CONSUME_OK) {
 				return true;
 			}
-
 			if (reader.getType() == Protocol.CONSUME_KO) {
 				return false;
 			}
 			return false;
-			
-			
 		} catch (IOException e) {
 			return false;
 		}
@@ -172,20 +158,15 @@ public class SessionClient {
 			reader.receive();
 			
 			if ( reader.getType() == Protocol.GET_STATS_OK ) {
-				/* Sauvegarde de l'image */
-				FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
-				
-				Player p = new Player(name,getImage("./res/"+reader.image+".png") , reader.cash);
+				Player p = new Player(name,getImage(reader.image) , reader.cash);
 				System.out.println(p.toString());
 				return p;
 			}
 			
-			if ( reader.getType() == Protocol.GET_STATS_KO )
-			{
+			if ( reader.getType() == Protocol.GET_STATS_KO ) {
 				System.out.println("échec stats");
 				return null;
 			}
-
 		}
 		catch (IOException e) {
 			return null;
@@ -206,16 +187,12 @@ public class SessionClient {
 			System.out.println("Réception de l'inventaire");
 			
 			if ( reader.getType() == Protocol.GET_INV_OK ) {
-				//FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes); // pb ici pour l'affichage d'un inventaire / shop nul ?
 				return reader.inventory; 
 			}
-			
-			if ( reader.getType() == Protocol.GET_INV_KO )
-			{
+			if ( reader.getType() == Protocol.GET_INV_KO ) {
 				return null;
 			}
 			return null;
-			
 		} catch (IOException e) {
 			return null;
 		}
@@ -223,7 +200,6 @@ public class SessionClient {
 
 	public Collection<Product> getShop() {
 		try {
-			
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
 			
@@ -234,17 +210,12 @@ public class SessionClient {
 			System.out.println("Réception du shop");
 			
 			if ( reader.getType() == Protocol.GET_SHOP_OK ) {
-				//FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
 				return reader.shop; 
 			}
-			
-			if ( reader.getType() == Protocol.GET_SHOP_KO )
-			{
+			if ( reader.getType() == Protocol.GET_SHOP_KO )	{
 				return null;
 			}
 			return null;
-			
-			
 		} catch (IOException e) {
 			return null;
 		}
@@ -278,8 +249,6 @@ public class SessionClient {
 
 	public boolean buyProduct(String productName) {
 		try {
-			
-			
 			Reader reader = new Reader(connection.getInputStream());
 			Writer writer = new Writer(connection.getOutputStream());
 
@@ -332,7 +301,33 @@ public class SessionClient {
 		}
 	}
 
-	public String getImage(String imageName) {
+	public String getImage(String imageName) {	//retourne le nom du fichier
+		// a pour vocation de télécharger l'image depuis le réseau et de la sauvegarder
+		try {
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+			
+			writer.reqImg(imageName);
+			writer.send();
+			
+			reader.receive();
+			System.out.println("Réception d'une image");
+			
+			if ( reader.getType() == Protocol.GET_IMG_OK ) {
+				System.out.println("Sauvegarde de l'image" + imageName);
+				FileHelper.writeContent(imageName, reader.imgBytes); //"./res/" + imageName + ".png"
+				return imageName;
+			}
+			if ( reader.getType() == Protocol.GET_IMG_KO ) {
+				System.out.println("Echec du chargement de l'image");
+				return null;
+			}
+			return null;
+			
+		} catch(IOException e) {
+			
+		}
+		
 		
 		return imageName;
 	}

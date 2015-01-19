@@ -13,6 +13,7 @@ public class Reader extends BasicAbstractReader {
 	long id;
 	int cash_asked;
 	String item_sold;
+	String imgName;
 	
 	public Reader(InputStream inputStream) {
 		super (inputStream);
@@ -87,13 +88,10 @@ public class Reader extends BasicAbstractReader {
 			id = readLong();
 			break;
 			
-			
-			
+		case Protocol.GET_IMG:
+			imgName = readString();
+			break;
 		}
-		
-		
-		
-		
 		
 	}
 
@@ -115,6 +113,10 @@ public class Reader extends BasicAbstractReader {
 	
 	public String getItem() {
 		return item_sold;
+	}
+
+	public String getImage() {
+		return imgName;
 	}
 }
 

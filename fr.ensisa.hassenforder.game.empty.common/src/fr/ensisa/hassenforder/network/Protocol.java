@@ -83,5 +83,13 @@ public interface Protocol {
 	public static final int CONSUME_OK = 61;
 	
 	public static final int CONSUME_KO = 62;
+	
+	
+	public static final int GET_IMG = 70;
+	
+	public static final int GET_IMG_OK = 71;
+	
+	public static final int GET_IMG_KO = 70;
+	
 }
 

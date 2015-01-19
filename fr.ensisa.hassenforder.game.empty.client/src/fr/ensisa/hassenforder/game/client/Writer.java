@@ -93,5 +93,10 @@ public class Writer extends BasicAbstractWriter {
 		writeLong(token);
 		
 	}
+
+	public void reqImg(String imageName) {
+		writeInt(Protocol.GET_IMG);
+		writeString(imageName);
+	}
 	
 }

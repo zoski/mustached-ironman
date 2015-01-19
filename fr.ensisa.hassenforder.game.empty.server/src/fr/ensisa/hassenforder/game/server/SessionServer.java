@@ -152,7 +152,9 @@ public class SessionServer {
 				}
 				break;
 				
-				
+			case Protocol.GET_IMG:
+				writer.getImageOK(reader.getImage());
+				break;
 				
 			case -1:
 				break;

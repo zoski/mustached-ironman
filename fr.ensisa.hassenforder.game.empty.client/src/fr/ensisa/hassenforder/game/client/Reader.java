@@ -15,12 +15,10 @@ public class Reader extends BasicAbstractReader {
 	long id;
 	int cash;
 	String image;
-	long length;
 	byte[] imgBytes;
 	
 	Collection<Product> inventory = new ArrayList<Product>();
 	Collection<Product> shop = new ArrayList<Product>();
-
 	
 	public Reader(InputStream inputStream) {
 		super (inputStream);
@@ -55,8 +53,6 @@ public class Reader extends BasicAbstractReader {
 		case Protocol.GET_STATS_OK:
 			cash = readInt();
 			image = readString();
-			length = readLong();
-			imgBytes = readBytes(length);
 			break;
 			
 		case Protocol.GET_STATS_KO:
@@ -65,18 +61,12 @@ public class Reader extends BasicAbstractReader {
 		case Protocol.GET_INV_OK:
 			
 			int size = readInt();
-			System.out.println("Nombre d'élement dans l'inventaire " +size);
-			for (int i=0;i<size;i++)
-			{
+			for (int i=0;i<size;i++) {
 				String catStr = readString();
 				Category category = Category.valueOf(catStr);
 				String itemName = readString();
 				
-				String imgPath = "./res/"+readString()+".png";
-				length = readLong();
-				imgBytes = readBytes(length);
-				FileHelper.writeContent(imgPath, imgBytes);		// Sauvegarde l'image -> fonctinne
-				
+				String imgPath = readString();
 				int duration = readInt();
 				boolean stackable = readBoolean();
 				int quantity = readInt();
@@ -84,34 +74,25 @@ public class Reader extends BasicAbstractReader {
 				Product p = new Product(category, itemName, imgPath, duration, stackable, quantity, time);
 				System.out.println(p.toString());
 				inventory.add(p);
-				
 			}
-			System.out.println("Tout à été envoyé");
-
+			System.out.println("Inventaire envoyé");
 		break;
 		
 		case Protocol.GET_INV_KO:
 			break;
 			
-			
 		case Protocol.GET_SHOP_KO:
 			break;
 			
 		case Protocol.GET_SHOP_OK:
-			
 			int sizeShop = readInt();
-			System.out.println("Nombre d'élement dans le shop " +sizeShop);
-			for (int i=0;i<sizeShop;i++)
-			{
+			for (int i=0;i<sizeShop;i++) {
 				String catStr = readString();
 				Category category = Category.valueOf(catStr);
 				String itemName = readString();
 				
-				String imgPath = "./res/"+readString()+".png";
-				length = readLong();
-				imgBytes = readBytes(length);
-				FileHelper.writeContent(imgPath, imgBytes);		// Sauvegarde l'image -> fonctinne
-				
+				String imgPath = readString();
+			
 				int duration = readInt();
 				boolean stackable = readBoolean();
 				int quantity = readInt();
@@ -119,11 +100,14 @@ public class Reader extends BasicAbstractReader {
 				Product p = new Product(category, itemName, imgPath, duration, stackable, quantity, time);
 				System.out.println(p.toString());
 				shop.add(p);
-				
 			}
-			System.out.println("Tout à été envoyé");
+			System.out.println("Shop envoyé");
 			break;
 			
+		case Protocol.GET_IMG_OK:
+			image = readString(); 
+			long length = readLong();
+			imgBytes = readBytes(length);
 			
 		case Protocol.REFRESH_SHOP_KO:
 			break;
@@ -131,14 +115,11 @@ public class Reader extends BasicAbstractReader {
 		case Protocol.REFRESH_SHOP_OK:
 			break;
 			
-			
-			
 		case Protocol.SELL_SHOP_OK:
 			break;
 			
 		case Protocol.SELL_SHOP_KO:
 			break;
-			
 			
 		case Protocol.BUY_SHOP_OK:
 			break;
