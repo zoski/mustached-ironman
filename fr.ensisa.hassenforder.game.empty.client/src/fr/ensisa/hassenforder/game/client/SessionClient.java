@@ -109,9 +109,25 @@ public class SessionClient {
 
 	public boolean clearProducts() {
 		try {
-			if (true)
-				throw new IOException("not yet implemented");
-			return true;
+			
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+
+			writer.reqClear(name, id);
+			writer.send();
+
+			reader.receive();
+			System.out.println("clear");
+
+			if (reader.getType() == Protocol.CLEAR_OK) {
+				return true;
+			}
+
+			if (reader.getType() == Protocol.CLEAR_KO) {
+				return false;
+			}
+			return false;
+			
 		} catch (IOException e) {
 			return false;
 		}
@@ -119,9 +135,27 @@ public class SessionClient {
 
 	public boolean consumeProducts() {
 		try {
-			if (true)
-				throw new IOException("not yet implemented");
-			return true;
+			
+			
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+
+			writer.reqConsume(name, id);
+			writer.send();
+
+			reader.receive();
+			System.out.println("consume");
+
+			if (reader.getType() == Protocol.CONSUME_OK) {
+				return true;
+			}
+
+			if (reader.getType() == Protocol.CONSUME_KO) {
+				return false;
+			}
+			return false;
+			
+			
 		} catch (IOException e) {
 			return false;
 		}
@@ -172,8 +206,8 @@ public class SessionClient {
 			System.out.println("Réception de l'inventaire");
 			
 			if ( reader.getType() == Protocol.GET_INV_OK ) {
-				FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
-				return reader.inventory; // CREER LARRAY ICI ????????????????????
+				//FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes); // pb ici pour l'affichage d'un inventaire / shop nul ?
+				return reader.inventory; 
 			}
 			
 			if ( reader.getType() == Protocol.GET_INV_KO )
@@ -200,7 +234,7 @@ public class SessionClient {
 			System.out.println("Réception du shop");
 			
 			if ( reader.getType() == Protocol.GET_SHOP_OK ) {
-				FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
+				//FileHelper.writeContent(getImage("./res/"+reader.image+".png"), reader.imgBytes);
 				return reader.shop; 
 			}
 			
@@ -244,9 +278,27 @@ public class SessionClient {
 
 	public boolean buyProduct(String productName) {
 		try {
-			if (true)
-				throw new IOException("not yet implemented");
-			return true;
+			
+			
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+
+			writer.reqBuy(name, id, productName);
+			writer.send();
+
+			reader.receive();
+			System.out.println("buy");
+
+			if (reader.getType() == Protocol.BUY_SHOP_OK) {
+				return true;
+			}
+
+			if (reader.getType() == Protocol.BUY_SHOP_KO) {
+				return false;
+			}
+			return false;
+			
+			
 		} catch (IOException e) {
 			return false;
 		}
@@ -254,9 +306,27 @@ public class SessionClient {
 
 	public boolean sellProduct(String productName) {
 		try {
-			if (true)
-				throw new IOException("not yet implemented");
-			return true;
+			
+			
+			Reader reader = new Reader(connection.getInputStream());
+			Writer writer = new Writer(connection.getOutputStream());
+
+			writer.reqSell(name, id, productName);
+			writer.send();
+
+			reader.receive();
+			System.out.println("sell");
+
+			if (reader.getType() == Protocol.SELL_SHOP_OK) {
+				return true;
+			}
+
+			if (reader.getType() == Protocol.SELL_SHOP_KO) {
+				return false;
+			}
+			return false;
+			
+			
 		} catch (IOException e) {
 			return false;
 		}

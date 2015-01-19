@@ -128,8 +128,34 @@ public class Reader extends BasicAbstractReader {
 		case Protocol.REFRESH_SHOP_KO:
 			break;
 			
-			
 		case Protocol.REFRESH_SHOP_OK:
+			break;
+			
+			
+			
+		case Protocol.SELL_SHOP_OK:
+			break;
+			
+		case Protocol.SELL_SHOP_KO:
+			break;
+			
+			
+		case Protocol.BUY_SHOP_OK:
+			break;
+			
+		case Protocol.BUY_SHOP_KO:
+			break;
+			
+		case Protocol.CLEAR_OK:
+			break;
+			
+		case Protocol.CLEAR_KO:
+			break;
+			
+		case Protocol.CONSUME_OK:
+			break;
+			
+		case Protocol.CONSUME_KO:
 			break;
 			
 		}

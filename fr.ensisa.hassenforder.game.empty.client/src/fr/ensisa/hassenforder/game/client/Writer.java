@@ -60,4 +60,38 @@ public class Writer extends BasicAbstractWriter {
 		
 	}
 
+	
+	public void reqSell(String name, long token, String productName) {
+		writeInt(Protocol.SELL_SHOP);
+		writeString(name);
+		writeLong(token);
+		writeString(productName);
+		
+	}
+	
+	
+	public void reqBuy(String name, long token, String productName) {
+		writeInt(Protocol.BUY_SHOP);
+		writeString(name);
+		writeLong(token);
+		writeString(productName);
+		
+	}
+	
+	
+	public void reqClear(String name, long token) {
+		writeInt(Protocol.CLEAR);
+		writeString(name);
+		writeLong(token);
+		
+	}
+	
+	
+	public void reqConsume(String name, long token) {
+		writeInt(Protocol.CONSUME);
+		writeString(name);
+		writeLong(token);
+		
+	}
+	
 }

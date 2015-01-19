@@ -111,6 +111,48 @@ public class SessionServer {
 				}
 				break;
 				
+			case Protocol.SELL_SHOP:
+				boolean b2 = document.sellProduct(reader.getUsername(), reader.getId(), reader.getItem());
+				System.out.println(b2);
+				if(b2 == true) {
+					writer.sellOK();
+				} else {
+					writer.sellKO();
+				}
+				break;
+				
+			case Protocol.BUY_SHOP:
+				boolean b3 = document.buyProduct(reader.getUsername(), reader.getId(), reader.getItem());
+				System.out.println(b3);
+				if(b3 == true) {
+					writer.buyOK();
+				} else {
+					writer.buyKO();
+				}
+				break;
+				
+			case Protocol.CLEAR:
+				boolean b4 = document.clearProducts(reader.getUsername(), reader.getId());
+				System.out.println(b4);
+				if(b4 == true) {
+					writer.clearOK();
+				} else {
+					writer.clearKO();
+				}
+				break;
+				
+				
+			case Protocol.CONSUME:
+				boolean b5 = document.consumeProducts(reader.getUsername(), reader.getId());
+				System.out.println(b5);
+				if(b5 == true) {
+					writer.consumeOK();
+				} else {
+					writer.consumeKO();
+				}
+				break;
+				
+				
 				
 			case -1:
 				break;

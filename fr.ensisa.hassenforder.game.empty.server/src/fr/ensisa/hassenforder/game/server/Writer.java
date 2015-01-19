@@ -150,5 +150,50 @@ public class Writer extends BasicAbstractWriter {
 	}
 	
 	
+	
+	public void sellOK() {
+		writeInt(Protocol.SELL_SHOP_OK);
+		System.out.println("sold gud");
+	}
+	
+	public void sellKO() {
+		writeInt(Protocol.SELL_SHOP_KO);
+		System.out.println("sell failure");
+	}
+	
+	
+	public void buyOK() {
+		writeInt(Protocol.BUY_SHOP_OK);
+		System.out.println("buy ok");
+	}
+	
+	public void buyKO() {
+		writeInt(Protocol.BUY_SHOP_KO);
+		System.out.println("buy failure");
+	}
+	
+	
+	public void clearOK() {
+		writeInt(Protocol.CLEAR_OK);
+		System.out.println("clear okaaaay");
+	}
+	
+	public void clearKO() {
+		writeInt(Protocol.CLEAR_KO);
+		System.out.println("clear koooo");
+	}
+	
+	
+	public void consumeOK() {
+		writeInt(Protocol.CONSUME_OK);
+		System.out.println("consume okaaaay");
+	}
+	
+	public void consumeKO() {
+		writeInt(Protocol.CONSUME_KO);
+		System.out.println("consume kookoko");
+	}
+	
+	
 }
 

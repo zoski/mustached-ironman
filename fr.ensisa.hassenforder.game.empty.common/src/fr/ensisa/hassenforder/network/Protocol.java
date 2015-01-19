@@ -57,4 +57,31 @@ public interface Protocol {
 	public static final int REFRESH_SHOP_KO = 42;
 	
 	
+	public static final int SELL_SHOP = 45;
+	
+	public static final int SELL_SHOP_OK = 46;
+	
+	public static final int SELL_SHOP_KO = 47;
+	
+	
+	public static final int BUY_SHOP = 50;
+	
+	public static final int BUY_SHOP_OK = 51;
+	
+	public static final int BUY_SHOP_KO = 52;
+	
+	
+	public static final int CLEAR = 55;
+	
+	public static final int CLEAR_OK = 56;
+	
+	public static final int CLEAR_KO = 57;
+	
+	
+	public static final int CONSUME = 60;
+	
+	public static final int CONSUME_OK = 61;
+	
+	public static final int CONSUME_KO = 62;
 }
+

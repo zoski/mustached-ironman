@@ -12,6 +12,7 @@ public class Reader extends BasicAbstractReader {
 	String password;
 	long id;
 	int cash_asked;
+	String item_sold;
 	
 	public Reader(InputStream inputStream) {
 		super (inputStream);
@@ -64,7 +65,35 @@ public class Reader extends BasicAbstractReader {
 			id = readLong();
 			break;
 			
+		case Protocol.SELL_SHOP:
+			username = readString();
+			id = readLong();
+			item_sold = readString();
+			break;
+			
+		case Protocol.BUY_SHOP:
+			username = readString();
+			id = readLong();
+			item_sold = readString();
+			break;
+			
+		case Protocol.CLEAR:
+			username = readString();
+			id = readLong();
+			break;
+			
+		case Protocol.CONSUME:
+			username = readString();
+			id = readLong();
+			break;
+			
+			
+			
 		}
+		
+		
+		
+		
 		
 	}
 
@@ -84,5 +113,8 @@ public class Reader extends BasicAbstractReader {
 		return cash_asked;
 	}
 	
+	public String getItem() {
+		return item_sold;
+	}
 }
 
